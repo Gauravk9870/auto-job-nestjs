@@ -37,6 +37,12 @@ export class AuthService {
         email: dto.email,
       },
     });
+    if (!user) throw new ForbiddenException('Credentials incorrect');
+
+    const pwMatches = await argon.verify(user.hash, dto.password);
+    console.log(pwMatches);
+    if (!pwMatches) throw new ForbiddenException('Credentials incorrect');
+
     return { msg: 'I have signed in' };
   }
 }

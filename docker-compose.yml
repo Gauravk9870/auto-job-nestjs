@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   autojobs-db:
     image: postgres:13
